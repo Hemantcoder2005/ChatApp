@@ -167,3 +167,70 @@ application = ProtocolTypeRouter(
 #### URLRouter
 - The URLRouter routes WebSocket connections to the appropriate consumer based on the URL.
 - It maps URL patterns to their corresponding consumers, similar to how Django's URL routing works for HTTP views.
+
+### Modal For chat (database)
+- Make changes to models.py under chat
+```python
+from django.db import models
+from django.contrib.auth.models import User  # Importing user model from django default auth system
+
+# Create your models here.
+class Message(models.Model):
+    body = models.TextField()
+    sentBy = models.CharField(max_length=255)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    created_By = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ('createdAt',)  
+    def __str__(self) -> str:
+        return f'{self.sentBy}'
+
+class Room(models.Model):
+    client = models.CharField(max_length=255)
+    agent = models.ForeignKey(User, related_name='rooms', blank=True, null=True, on_delete=models.SET_NULL)
+    messages = models.ManyToManyField(Message, blank=True)
+    url = models.CharField(max_length=255, blank=True, null=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('createdAt',)  
+    def __str__(self) -> str:
+        return f'{self.client}'
+```
+```bash 
+python manage.py makemigrations
+```
+```bash 
+python manage.py migrate
+```
+- Now, We have to register our model under Admin.py
+```python
+from django.contrib import admin
+from .models import *
+# Register your models here.
+admin.site.register(Message)
+admin.site.register(Room)
+```
+- Run server if it is running that's great!
+- Now go to http://127.0.0.1:8000/admin
+
+### Creating index.html to make browser and server interact
+
+- in settings.py
+```python
+TEMPLATES = [
+    {
+        # your code
+        'DIRS': [os.path.join(BASE_DIR,'templetes')],
+        # your code
+    },
+]
+
+```
+
+- Create a file name templetes under your project
+- Inside it create index.html
+```html
+
+```
