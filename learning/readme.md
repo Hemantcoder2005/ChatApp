@@ -21,3 +21,19 @@ WebSockets is a communication protocol that provides a consistent connection bet
 - Now, We will upgrade Webscokets to Channel layer.
 - This feature is useful when we have to send message in groups.
 - In this phase, we will use async_to_sync,group_send() function.
+
+# Let's Start!
+## Create Virtul Environment
+### Create
+```bash
+python -m venv env
+```
+### Activate
+#### Linux or Mac
+```bash
+source env/bin/activate
+```
+#### Windows
+```bash
+env\Scripts\activate
+```
