@@ -37,3 +37,30 @@ source env/bin/activate
 ```bash
 env\Scripts\activate
 ```
+## Installation
+```bash
+pip install -r requirements.txt
+```
+requirements.txt is  present in github repo.
+
+## Add daphne
+- Add daphne to your settings.py INSTALLED_APPS
+- Please ensure daphane is added front of dist
+
+## Points to Be noted
+- In this we will not discuss about authentication system.
+- As we will create 3 superuser by running following commands
+- First Make migrations
+```bash
+python manage.py migrate 
+```
+```bash
+python manage.py createsuperuser
+``` 
+- Run it 3 or more to create users.
+- Now run your server by
+```bash
+python manage.py runserver
+```
+- Now go to http://127.0.0.1:8000/admin
+- login in django adminstration
