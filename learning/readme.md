@@ -44,9 +44,24 @@ pip install -r requirements.txt
 requirements.txt is  present in github repo.
 
 ## Add daphne
-- Add daphne to your settings.py INSTALLED_APPS
-- Please ensure daphane is added front of dist
-
+- Go to settings.py add following codes
+```python
+INSTALLED_APPS = [
+    'daphne',
+    # Rest of all your apps.
+]
+```
+Note in above code daphne should added at the top.
+```python
+CHANNELS_LAYERS = {
+    'default':{
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+    }
+}
+```
+```python
+ASGI_APPLICATION = 'learning.asgi.application'
+```
 ## Points to Be noted
 - In this we will not discuss about authentication system.
 - As we will create 3 superuser by running following commands
@@ -57,10 +72,11 @@ python manage.py migrate
 ```bash
 python manage.py createsuperuser
 ``` 
-- Run it 3 or more to create users.
+- Run it 3 or more times to create multiple users.
 - Now run your server by
 ```bash
 python manage.py runserver
 ```
+- You can also see server running and also stated Starting ASGI/Daphne (This means we have successfully setup daphne😊)
 - Now go to http://127.0.0.1:8000/admin
 - login in django adminstration

@@ -28,9 +28,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
+CHANNELS_LAYERS = {
+    'default':{
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+    }
+}
+
+# Application definition
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'learning.wsgi.application'
-
+ASGI_APPLICATION = 'learning.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
