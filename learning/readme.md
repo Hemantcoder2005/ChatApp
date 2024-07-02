@@ -1,8 +1,8 @@
 # What is WebSockets?
-Communication protocol that provides consistent connection between client and sever
+WebSockets is a communication protocol that provides a consistent connection between a client and a server.
 
-# HTTP synchronous vs Webscoket asynchronous
-<div style = "display:flex;algin-items:center;justify-content:center;">
-<img src = "srcs/1.png">
-<img src = "srcs/2.png">
+# HTTP synchronous vs WebSocket asynchronous
+<div style="display:flex; align-items:center; justify-content:center;">
+  <img src="srcs/1.png" alt="HTTP synchronous">
+  <img src="srcs/2.png" alt="WebSocket asynchronous">
 </div>
