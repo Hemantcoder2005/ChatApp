@@ -228,7 +228,34 @@ TEMPLATES = [
 ]
 
 ```
+#### ProTip
+Want to use django like Live Server for avoiding reloading
+```bash 
+pip install django-browser-reload
+```
+```python
+INSTALLED_APPS = [
+    ...,
+    "django_browser_reload",
+    ...,
+]
+```
+```python
+MIDDLEWARE = [
+    # ...
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    # ...
+]
+```
+In urls.py
 
+```python
+from django.urls import include, path
+urlpatterns = [
+    ...,
+    path("__reload__/", include("django_browser_reload.urls")),
+]
+```
 - Create a file name templetes under your project
 - Inside it create index.html
 ```html
