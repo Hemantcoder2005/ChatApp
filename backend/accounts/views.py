@@ -27,9 +27,12 @@ def generateTokens(user):
         'refresh' : refresh,
         'access' : refresh.access_token
         }
-def checkToken(request) -> dict:
+def checkToken(request = None,jwtToken = None) -> dict:
     '''Check token'''
-    token = request.COOKIES.get('jwt')
+    if not jwtToken == None:
+        token = jwtToken
+    else:
+        token = request.COOKIES.get('jwt')
     if not token:
         return {
             'error' : True,
@@ -37,10 +40,10 @@ def checkToken(request) -> dict:
         }
     try:
         payload = jwt.decode(token,'secret',algorithms=["HS256"])
-    except jwt.ExpiredSignatureError:
+    except :
         return {
             'error': True,
-            'mssg': "Session expired. Please login again."
+            'mssg': "Session expired or Incorrect key. Please login again."
         }
     
     try:
@@ -110,7 +113,7 @@ class LoginView(APIView):
                 # JWT
                 payload = {
                     'id': user.id,
-                    'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(seconds=30),
+                    'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(days=1),
                     'iat': datetime.datetime.now(datetime.UTC)
                 }
                 print(datetime.datetime.now(datetime.UTC))
