@@ -45,7 +45,7 @@ def checkToken(request) -> dict:
     
     try:
         return {
-            'error':True,
+            'error':False,
             'userId' : payload['id']
         }
     except:
@@ -110,7 +110,7 @@ class LoginView(APIView):
                 # JWT
                 payload = {
                     'id': user.id,
-                    'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(days=1),
+                    'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(seconds=30),
                     'iat': datetime.datetime.now(datetime.UTC)
                 }
                 print(datetime.datetime.now(datetime.UTC))
