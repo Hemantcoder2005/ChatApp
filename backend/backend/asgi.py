@@ -1,4 +1,4 @@
-# mysite/asgi.py
+# backend/asgi.py
 import os
 
 from channels.auth import AuthMiddlewareStack
@@ -21,4 +21,3 @@ application = ProtocolTypeRouter(
         ),
     }
 )
-app = application
