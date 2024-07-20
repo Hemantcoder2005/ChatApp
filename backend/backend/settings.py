@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'notification',
     'channels',
     'chat',
-    'vercel',
+    # 'vercel',
 ]
 
 MIDDLEWARE = [
