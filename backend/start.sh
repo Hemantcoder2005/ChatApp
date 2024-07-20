@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Update package list and install system dependencies
+apt-get update && apt-get install -y libffi-dev libssl-dev
+
+# Install Python dependencies
+pip install -r requirements.txt
+
 # Apply database migrations
 python manage.py migrate
 
