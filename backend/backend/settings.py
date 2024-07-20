@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+env = environ.Env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     'notification',
     'channels',
     'chat',
+    'vercel',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +81,9 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
+            'hosts': [
+                f"rediss://default:{env('REDIS_PASSWORD')}@caching-25ace4b-hemantnarula2203-3f8e.i.aivencloud.com:25149"
+            ],
         },
     },
 }
@@ -111,14 +117,14 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': "defaultdb",
-       'USER': 'avnadmin',
-       'PASSWORD': 'AVNS_UvuyIH79jyDE-e1G5xq',
-       'HOST': 'pg-338d731b-hemantnarula2203-3f8e.i.aivencloud.com',
-       'PORT': '25148',
-   }
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
+    }
 }
 
 
