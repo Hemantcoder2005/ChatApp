@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/backend/asgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "pythonVersion": "3.12"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/backend/asgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "public/index.html"
+    }
+  ],
+  "scripts": {
+    "start": "daphne -b 0.0.0.0:8000 backend.backend:application"
+  }
+}
